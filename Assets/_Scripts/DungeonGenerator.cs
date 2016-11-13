@@ -12,7 +12,6 @@ public class DungeonGenerator : MonoBehaviour {
 	public GameObject[] crystals;			//Array of possible stat crystals to be placed in a tile
 
 	public int rooms;						//number of rooms in the dungeon
-
 	public int sizeX;						//Size of the dungeon in the vertical direction
 	public int sizeY;						//Size of the dungeon in the horizontal direction
 
@@ -35,8 +34,8 @@ public class DungeonGenerator : MonoBehaviour {
 		
 	private int currentRoomNum = 0;			//The amount of rooms currently in the dungeon
 	private System.Random randomGenerator;	//The random generator used for random situations
-	public static readonly float tileSize = 4.17f;
 
+	public static readonly float tileSize = 4.17f;
 
 
 	// Use this for initialization
@@ -64,8 +63,6 @@ public class DungeonGenerator : MonoBehaviour {
 
 	void Start()
 	{
-		
-		
 		SpawnObjects();
 	}
 
