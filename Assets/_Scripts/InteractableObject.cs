@@ -15,16 +15,16 @@ public class InteractableObject : MonoBehaviour {
 	
 	}
 
-	public virtual void Interact(Player player)
+	public virtual void Interact()
 	{
 		//Let the childeren decide how they interact :)
 	}
 
 	//This resets the tile so the player can walk on it
 	//Called when the player picks up the object or destroys the enemy on the tile
-	protected void ResetTile(Player player)
+	protected void ResetTile()
 	{
-		player.currentTile = currentTile;
+		Player.instance.currentTile = currentTile;
 		currentTile.isEmpty = true;
 		currentTile.owner = null;
 	}

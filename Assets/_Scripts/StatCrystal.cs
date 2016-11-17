@@ -14,31 +14,36 @@ public class StatCrystal : InteractableObject {
 	}
 
 	//Using this methodology the crystal class can be any mixture of stat increases, 
-	//such as a crystal that increases attack and defense
-	public override void Interact (Player player)
+	//such as a crystal that increases attack and defense, etc...
+	//
+	//This also lets the designer customize what the crystals are doing directly
+	//in the editor.
+
+	public override void Interact ()
 	{
 		if(power > 0)
 		{
-			player.power += power;
+			Player.instance.power += power;
 		}
 
 		if(defense > 0)
 		{
-			player.defense += defense;
+			Player.instance.defense += defense;
 		}
 
 		if(health > 0)
 		{
-			player.health += health;
+			Player.instance.maxHealth += health;
+			Player.instance.health += health;
 		}
 
 		if(attackSpeed > 0)
 		{
-			player.attackSpeed += attackSpeed;
+			Player.instance.attackSpeed += attackSpeed;
 		}
 
 		//reset the tile when the player picks up the crystal
-		ResetTile(player);
+		ResetTile();
 		//Remove the crystal when picked up
 		Destroy(gameObject);
 	}

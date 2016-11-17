@@ -1,35 +1,40 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Collections;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : PersistentSingleton<GameManager> {
 
-	public static GameManager instance;
+	public GameObject pausePanel;
+
+	private bool isPaused;
 
 
-	// Use this for initialization
-	void Awake () {
 
-		if(instance == null)
-		{
-			instance = this;
-		}
-		else if(instance != this)
-		{
-			Destroy(gameObject);
-		}
-
-		DontDestroyOnLoad(gameObject);
-	
+	void Start()
+	{
+		isPaused = false;
 	}
 
-	public void Battle(ref Enemy enemy)
+	public void Battle(Enemy enemy)
 	{
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+			isPaused = !isPaused;
+			SetPause();
+		}
+	}
+
+	void SetPause()
+	{
+		float timeScale = !isPaused ? 1f : 0f;
+		Time.timeScale = timeScale;
+		Cursor.visible = isPaused;
+		pausePanel.SetActive(isPaused);
 	}
 }

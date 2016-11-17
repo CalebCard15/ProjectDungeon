@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 
-public class Player : MonoBehaviour {
+public class Player : PersistentSingleton<Player> {
 
+
+	public static Player instance;			//The instance for the singleton 
 
 	public Animator anim;
 
-	public int health = 20;
+	public int maxHealth = 20;
+	public int health;
 	public int power = 2;
 	public int defense = 0; 
 	public float attackSpeed = 1f;
@@ -18,9 +22,24 @@ public class Player : MonoBehaviour {
 	private float timeSinceWalk = 0f;
 
 
+	void Awake () {
+
+		if(instance == null)
+		{
+			instance = this;
+		}
+		else if(instance != this)
+		{
+			Destroy(gameObject);
+		}
+
+		DontDestroyOnLoad(gameObject);
+
+	}
+
 	// Use this for initialization
 	void Start () {
-
+		health = maxHealth;
 		currentTile = DungeonGenerator.dungeon[0,0];
 		anim = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
@@ -81,7 +100,7 @@ public class Player : MonoBehaviour {
 				}
 				else
 				{
-					DungeonGenerator.dungeon[currentTile.x, currentTile.y + horiz].owner.Interact(this);
+					DungeonGenerator.dungeon[currentTile.x, currentTile.y + horiz].owner.Interact();
 				}
 					
 			}
@@ -98,7 +117,7 @@ public class Player : MonoBehaviour {
 					
 				else
 				{
-					DungeonGenerator.dungeon[currentTile.x + vert, currentTile.y].owner.Interact(this);
+					DungeonGenerator.dungeon[currentTile.x + vert, currentTile.y].owner.Interact();
 				}
 					
 			}
@@ -128,6 +147,7 @@ public class Player : MonoBehaviour {
 	public void TakeDamage(int damage)
 	{
 		health -= damage - defense;
+		PlayerUIManager.instance.UpdateUI();
 		if(health <= 0)
 		{
 			//TODO: Die...

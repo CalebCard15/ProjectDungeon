@@ -23,35 +23,35 @@ public class Enemy : InteractableObject {
 	
 	}
 
-	public override void Interact (Player player)
+	public override void Interact()
 	{
-		spriteRenderer.flipX = player.isFlipped();
+		spriteRenderer.flipX = Player.instance.isFlipped();
 		
-		player.anim.SetTrigger("Attack");
+		Player.instance.anim.SetTrigger("Attack");
 		anim.SetTrigger("Attack");
 
-		if(player.attackSpeed >= attackSpeed)
+		if(Player.instance.attackSpeed >= attackSpeed)
 		{
-			TakeDamage(player.power, player);
-			player.TakeDamage(power);
+			TakeDamage(Player.instance.power);
+			Player.instance.TakeDamage(power);
 
-			print("Player Health: " + player.health + "\t Enemy Health: " + health);
+			print("Player Health: " + Player.instance.health + "\t Enemy Health: " + health);
 		}
 		else
 		{
-			player.TakeDamage(power);
-			TakeDamage(player.power, player);
+			Player.instance.TakeDamage(power);
+			TakeDamage(Player.instance.power);
 
-			print("Player Health: " + player.health + "\t Enemy Health: " + health);
+			print("Player Health: " + Player.instance.health + "\t Enemy Health: " + health);
 		}
 	}
 
-	void TakeDamage(int damage, Player player)
+	void TakeDamage(int damage)
 	{
 		health -= damage - defense;
 		if(health <= 0)
 		{
-			ResetTile(player);
+			ResetTile();
 			Destroy(gameObject);
 		}
 	}
