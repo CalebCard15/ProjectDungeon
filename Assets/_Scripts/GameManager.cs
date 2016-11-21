@@ -9,6 +9,8 @@ public class GameManager : PersistentSingleton<GameManager> {
 
 	private bool isPaused;
 
+	private int gameLevel = 3;
+
 
 
 	void Start()
@@ -16,9 +18,10 @@ public class GameManager : PersistentSingleton<GameManager> {
 		isPaused = false;
 	}
 
-	public void Battle(Enemy enemy)
+
+	public void LoadNewLevel()
 	{
-		
+		SceneManager.LoadScene(gameLevel);
 	}
 	
 	// Update is called once per frame

@@ -18,6 +18,7 @@ public class MiniMap : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		target = GameObject.Find("Player").GetComponent<Transform>();
 		cam = GetComponent<Camera>();
 		camAngle = transform.eulerAngles;
 		targetAngle = target.transform.eulerAngles;

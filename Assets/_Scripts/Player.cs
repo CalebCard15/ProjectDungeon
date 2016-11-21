@@ -5,8 +5,6 @@ using System.Collections;
 public class Player : PersistentSingleton<Player> {
 
 
-	public static Player instance;			//The instance for the singleton 
-
 	public Animator anim;
 
 	public int maxHealth = 20;
@@ -21,21 +19,6 @@ public class Player : PersistentSingleton<Player> {
 	private float walkTimeDelay = .175f;
 	private float timeSinceWalk = 0f;
 
-
-	void Awake () {
-
-		if(instance == null)
-		{
-			instance = this;
-		}
-		else if(instance != this)
-		{
-			Destroy(gameObject);
-		}
-
-		DontDestroyOnLoad(gameObject);
-
-	}
 
 	// Use this for initialization
 	void Start () {

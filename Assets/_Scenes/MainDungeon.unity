@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692558, g: 0.49678743, b: 0.57508624, a: 1}
+  m_IndirectSpecularColor: {r: 0.4469247, g: 0.49678522, b: 0.5750836, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1540,6 +1540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a951447b0e24192a645b7153c02ab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exit: {fileID: 1000013317960920, guid: 6d9cdd513e5ed43a2b1133cd820f614b, type: 2}
   enemies:
   - {fileID: 1000013356232974, guid: cc4b9794739e80d4b92519b9bcaa287c, type: 2}
   crystals:

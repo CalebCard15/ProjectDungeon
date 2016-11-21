@@ -8,6 +8,7 @@ public enum TileType{FourOpen, OpenNorth, OpenSouth, OpenEast, OpenWest, ClosedN
 
 public class DungeonGenerator : MonoBehaviour {
 
+	public GameObject exit;					//The prefab of the dungeon exit tile
 	public GameObject[] enemies;			//Array of possible enemies to be place in a tile
 	public GameObject[] crystals;			//Array of possible stat crystals to be placed in a tile
 
@@ -234,8 +235,9 @@ public class DungeonGenerator : MonoBehaviour {
 			}
 		}
 
-		//After the loop has looped, set the final endTile to be the one true endTile to save the world
+		//After the loop has looped, set the final endTile to be the one true endTile
 		lastTile.endTile = true;
+		SpawnExit(lastTile);
 	}
 
 
@@ -381,7 +383,7 @@ public class DungeonGenerator : MonoBehaviour {
 					
 				}
 
-				if(dungeon[i,j].type != TileType.FourClosed)
+				if(dungeon[i,j].type != TileType.FourClosed && !dungeon[i,j].endTile)
 				{
 					emptyTiles.Add(dungeon[i,j]);
 					dungeon[i,j].isEmpty = true;
@@ -396,6 +398,7 @@ public class DungeonGenerator : MonoBehaviour {
 	{
 		//Remove the origin where the player starts
 		emptyTiles.Remove(dungeon[0,0]);
+		Player.instance.currentTile = dungeon[0,0];
 		
 		//Spawn Crystals first
 		for(int i = 0; i < numberOfCrystals; i++)
@@ -429,6 +432,14 @@ public class DungeonGenerator : MonoBehaviour {
 		tile.owner.currentTile = tile;
 		tile.isEmpty = false;
 		emptyTiles.Remove(tile);
+	}
+
+	void SpawnExit(Tile tile)
+	{
+		GameObject inst = (GameObject)Instantiate(exit, new Vector3(tile.y*tileSize, tile.x*tileSize, 0), exit.transform.rotation);
+		tile.owner = inst.GetComponent<InteractableObject>();
+		tile.owner.currentTile = tile;
+		tile.isEmpty = false;
 	}
 
 
