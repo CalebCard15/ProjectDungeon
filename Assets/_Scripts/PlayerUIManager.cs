@@ -9,6 +9,8 @@ public class PlayerUIManager : PersistentSingleton<PlayerUIManager> {
 	public Text xpText;
 	public Image healthBar;
 	public Image xpBar;
+	public Text highScore;
+	public Text currentScore;
 
 	void OnEnable()
 	{
@@ -35,6 +37,8 @@ public class PlayerUIManager : PersistentSingleton<PlayerUIManager> {
 	{
 		healthText = GameObject.Find("HealthText").GetComponent<Text>();
 		healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
+		highScore = GameObject.Find("HighScore").GetComponent<Text>();
+		currentScore = GameObject.Find("CurrentScore").GetComponent<Text>();
 		UpdateUI();
 	}
 
@@ -42,6 +46,8 @@ public class PlayerUIManager : PersistentSingleton<PlayerUIManager> {
 	{
 		healthText.text = Player.instance.health + " <b>/</b> " + Player.instance.maxHealth;
 		healthBar.fillAmount = (float)Player.instance.health/Player.instance.maxHealth;
+		currentScore.text = "Current Level: " + GameManager.instance.currentLevel;
+		highScore.text = "HighScore: " + GameManager.instance.highScore; 
 	}
 
 

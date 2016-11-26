@@ -133,7 +133,7 @@ public class Player : PersistentSingleton<Player> {
 		PlayerUIManager.instance.UpdateUI();
 		if(health <= 0)
 		{
-			//TODO: Die...
+			GameManager.instance.PlayerDie();
 		}
 	}
 
