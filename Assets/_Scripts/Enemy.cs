@@ -6,7 +6,6 @@ public class Enemy : InteractableObject {
 	public int health = 10;
 	public int power = 5;
 	public int defense = 0;
-	public float attackSpeed = .5f;
 
 	public Animator anim;
 
@@ -30,24 +29,19 @@ public class Enemy : InteractableObject {
 		Player.instance.anim.SetTrigger("Attack");
 		anim.SetTrigger("Attack");
 
-		if(Player.instance.attackSpeed >= attackSpeed)
-		{
-			TakeDamage(Player.instance.power);
-			Player.instance.TakeDamage(power);
+		TakeDamage(Player.instance.power);
+		Player.instance.TakeDamage(power);
 
-			print("Player Health: " + Player.instance.health + "\t Enemy Health: " + health);
-		}
-		else
-		{
-			Player.instance.TakeDamage(power);
-			TakeDamage(Player.instance.power);
-
-			print("Player Health: " + Player.instance.health + "\t Enemy Health: " + health);
-		}
+		print("Player Health: " + Player.instance.health + "\t Enemy Health: " + health);
 	}
 
-	void TakeDamage(int damage)
+	public void TakeDamage(int damage)
 	{
+		if(damage - defense <= 0)
+		{
+			//take no damage
+			return;
+		}
 		health -= damage - defense;
 		if(health <= 0)
 		{
@@ -56,3 +50,17 @@ public class Enemy : InteractableObject {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+/* Scrap code
+
+*/

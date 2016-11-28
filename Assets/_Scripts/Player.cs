@@ -11,7 +11,8 @@ public class Player : PersistentSingleton<Player> {
 	public int health;
 	public int power = 2;
 	public int defense = 0; 
-	public float attackSpeed = 1f;
+	//public float attackSpeed = 1f;
+	public bool canMove;
 
 	public Tile currentTile;
 
@@ -20,8 +21,10 @@ public class Player : PersistentSingleton<Player> {
 	private float timeSinceWalk = 0f;
 
 
+
 	// Use this for initialization
 	void Start () {
+		canMove = true;
 		health = maxHealth;
 		currentTile = DungeonGenerator.dungeon[0,0];
 		anim = GetComponent<Animator>();
@@ -31,41 +34,44 @@ public class Player : PersistentSingleton<Player> {
 
 	// Update is called once per frame
 	void Update () {
-
-		timeSinceWalk += Time.deltaTime;
-
-		Vector3 movePosition = new Vector3(currentTile.y*DungeonGenerator.tileSize, currentTile.x * DungeonGenerator.tileSize, 0);
-
-		transform.position = Vector3.Lerp(transform.position, movePosition, .75f);
-
-		if(timeSinceWalk >= walkTimeDelay)
+		if(canMove)
 		{
-			
+			timeSinceWalk += Time.deltaTime;
 
-			int horizontal;
-			int vertical;
+			Vector3 movePosition = new Vector3(currentTile.y*DungeonGenerator.tileSize, currentTile.x * DungeonGenerator.tileSize, 0);
 
-			horizontal = (int)Input.GetAxisRaw("Horizontal");
-			vertical = (int)Input.GetAxisRaw("Vertical");
-			if(horizontal != 0 || vertical != 0)
+			transform.position = Vector3.Lerp(transform.position, movePosition, .75f);
+
+			if(timeSinceWalk >= walkTimeDelay)
 			{
-				if(horizontal != 0)
+
+
+				int horizontal;
+				int vertical;
+
+				horizontal = (int)Input.GetAxisRaw("Horizontal");
+				vertical = (int)Input.GetAxisRaw("Vertical");
+				if(horizontal != 0 || vertical != 0)
 				{
-					spriteRenderer.flipX = horizontal > 0 ? false : true;
+					if(horizontal != 0)
+					{
+						spriteRenderer.flipX = horizontal > 0 ? false : true;
 
 
-					vertical = 0;
+						vertical = 0;
+					}
+
+					Move(vertical, horizontal);
+
+
 				}
 
-				Move(vertical, horizontal);
 
 
+				timeSinceWalk = 0f;
 			}
-
-
-
-			timeSinceWalk = 0f;
 		}
+
 	
 	}
 
@@ -129,6 +135,11 @@ public class Player : PersistentSingleton<Player> {
 
 	public void TakeDamage(int damage)
 	{
+		if(damage - defense <= 0)
+		{
+			//take no damage
+			return;
+		}
 		health -= damage - defense;
 		PlayerUIManager.instance.UpdateUI();
 		if(health <= 0)

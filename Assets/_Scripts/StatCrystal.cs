@@ -41,6 +41,7 @@ public class StatCrystal : InteractableObject {
 		{
 			Player.instance.attackSpeed += attackSpeed;
 		}
+		PlayerUIManager.instance.UpdateUI();
 
 		//reset the tile when the player picks up the crystal
 		ResetTile();
