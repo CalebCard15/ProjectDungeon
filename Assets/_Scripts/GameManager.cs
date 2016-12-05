@@ -26,7 +26,7 @@ public class GameManager : PersistentSingleton<GameManager> {
 
 		highScore = PlayerPrefs.GetInt("HighScore");
 		currentLevel = 1;
-		PlayerUIManager.instance.UpdateUI();
+		UIManager.instance.UpdateUI();
 		isPaused = false;
 	}
 
@@ -49,11 +49,13 @@ public class GameManager : PersistentSingleton<GameManager> {
 
 	public void PlayerDie()
 	{
-		if(highScore > PlayerPrefs.GetInt("HighScore"))
+		if(currentLevel > highScore)
 		{
-			PlayerPrefs.SetInt("HighScore", highScore);
+			PlayerPrefs.SetInt("HighScore", currentLevel);
+			highScore = PlayerPrefs.GetInt("HighScore");
 		}
 		currentLevel = 1;
+		UIManager.instance.ReactivateEnemyPanel();
 		Player.instance.health = Player.instance.maxHealth;
 		SceneManager.LoadScene(startMenuLevel);
 	}

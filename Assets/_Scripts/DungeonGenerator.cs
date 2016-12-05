@@ -418,6 +418,7 @@ public class DungeonGenerator : MonoBehaviour {
 	{
 		int randomNumber = randomGenerator.Next(0, enemies.Length);
 		GameObject inst = (GameObject)Instantiate(enemies[randomNumber], new Vector3(tile.y*tileSize, tile.x*tileSize, 0), enemies[randomNumber].transform.rotation);
+		inst.name = enemies[randomNumber].name;
 		tile.owner = inst.GetComponent<InteractableObject>();
 		tile.owner.currentTile = tile;
 		tile.isEmpty = false;

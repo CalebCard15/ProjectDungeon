@@ -3,18 +3,22 @@ using System.Collections;
 
 public class Enemy : InteractableObject {
 
+	public int maxHealth = 10;
 	public int health = 10;
-	public int power = 5;
+	public int power = 1;
 	public int defense = 0;
 
 	public Animator anim;
+	public AudioSource attackAudio;
 
+	private bool isDead;
 	private SpriteRenderer spriteRenderer;
 
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		attackAudio = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -25,12 +29,20 @@ public class Enemy : InteractableObject {
 	public override void Interact()
 	{
 		spriteRenderer.flipX = Player.instance.isFlipped();
-		
-		Player.instance.anim.SetTrigger("Attack");
-		anim.SetTrigger("Attack");
 
+		//Player Attack animation and sound
+		Player.instance.anim.SetTrigger("Attack");
+		Player.instance.attackAudio.Play();
 		TakeDamage(Player.instance.power);
+
+		//Enemy Attack animation and sound
+		anim.SetTrigger("Attack");
+		attackAudio.Play();
 		Player.instance.TakeDamage(power);
+
+
+
+
 
 		print("Player Health: " + Player.instance.health + "\t Enemy Health: " + health);
 	}
@@ -43,6 +55,7 @@ public class Enemy : InteractableObject {
 			return;
 		}
 		health -= damage - defense;
+		UIManager.instance.UpdateEnemyUI(this);
 		if(health <= 0)
 		{
 			ResetTile();

@@ -11,9 +11,9 @@ public class Player : PersistentSingleton<Player> {
 	public int health;
 	public int power = 2;
 	public int defense = 0; 
-	//public float attackSpeed = 1f;
+	public float attackSpeed = 1f;
 	public bool canMove;
-
+	public AudioSource attackAudio;
 	public Tile currentTile;
 
 	private SpriteRenderer spriteRenderer;
@@ -29,6 +29,7 @@ public class Player : PersistentSingleton<Player> {
 		currentTile = DungeonGenerator.dungeon[0,0];
 		anim = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		attackAudio = GetComponent<AudioSource>();
 	
 	}
 
@@ -141,7 +142,7 @@ public class Player : PersistentSingleton<Player> {
 			return;
 		}
 		health -= damage - defense;
-		PlayerUIManager.instance.UpdateUI();
+		UIManager.instance.UpdateUI();
 		if(health <= 0)
 		{
 			GameManager.instance.PlayerDie();

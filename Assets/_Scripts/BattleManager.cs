@@ -18,7 +18,7 @@ public class BattleManager : PersistentSingleton<BattleManager> {
 		enemyAttackTimer += Time.deltaTime;
 	}
 
-	public IEnumerator Fight(Enemy enemy)
+	public void Fight(Enemy enemy)
 	{
 		Player.instance.canMove = false;
 
@@ -31,7 +31,6 @@ public class BattleManager : PersistentSingleton<BattleManager> {
 			enemy.TakeDamage(Player.instance.power);
 			if(enemy.health <= 0)
 				break;
-			yield return new WaitForSeconds(Player.instance.attackSpeed);
 			enemy.anim.SetTrigger("Attack");
 			Player.instance.TakeDamage(enemy.power);
 		}
