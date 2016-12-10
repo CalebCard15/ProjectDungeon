@@ -8,6 +8,6 @@ public class DungeonExit : InteractableObject {
 	{
 		print("exit now");
 		ResetTile();
-		GameManager.instance.LoadNewLevel();
+		StartCoroutine(GameManager.instance.LoadNewLevel());
 	}
 }

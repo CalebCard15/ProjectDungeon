@@ -31,9 +31,11 @@ public class GameManager : PersistentSingleton<GameManager> {
 	}
 
 
-	public void LoadNewLevel()
+	public IEnumerator LoadNewLevel()
 	{
 		currentLevel++;
+		Player.instance.exitAudio.Play();
+		yield return new WaitForSeconds(Player.instance.exitAudio.clip.length);
 		highScore = currentLevel > highScore ? currentLevel : highScore;
 		SceneManager.LoadScene(gameLevel);
 	}

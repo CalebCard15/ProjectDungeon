@@ -13,7 +13,8 @@ public class Player : PersistentSingleton<Player> {
 	public int defense = 0; 
 	public float attackSpeed = 1f;
 	public bool canMove;
-	public AudioSource attackAudio;
+	public AudioSource attackAudio;				//Sound for the player's attacks
+	public AudioSource exitAudio;				//Sound for when the player goes to the next level
 	public Tile currentTile;
 
 	private SpriteRenderer spriteRenderer;
@@ -29,7 +30,6 @@ public class Player : PersistentSingleton<Player> {
 		currentTile = DungeonGenerator.dungeon[0,0];
 		anim = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
-		attackAudio = GetComponent<AudioSource>();
 	
 	}
 
@@ -76,7 +76,8 @@ public class Player : PersistentSingleton<Player> {
 	
 	}
 
-
+	//Called when the player attempts to move.
+	//Starts all interactions with interactable objects
 	void Move(int vert, int horiz)
 	{
 		if(vert == 0)
@@ -145,9 +146,20 @@ public class Player : PersistentSingleton<Player> {
 		UIManager.instance.UpdateUI();
 		if(health <= 0)
 		{
+			ResetStats();
 			GameManager.instance.PlayerDie();
 		}
 	}
+
+	private void ResetStats()
+	{
+		maxHealth = 20;
+		health = maxHealth;
+		power = 2;
+		defense = 0;
+
+	}
+
 
 
 }
