@@ -5,6 +5,7 @@ using System.Collections;
 
 public class UIManager : PersistentSingleton<UIManager> {
 
+	public GameObject pauseScreen;
 	public Text healthText;
 	public Text xpText;
 	public Image healthBar;
@@ -41,6 +42,10 @@ public class UIManager : PersistentSingleton<UIManager> {
 
 	void Init()
 	{
+		//PauseScreen
+		pauseScreen = GameObject.Find("OptionsCanvas");
+		pauseScreen.SetActive(false);
+
 		//Player UI
 		healthText = GameObject.Find("HealthText").GetComponent<Text>();
 		healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
@@ -61,6 +66,7 @@ public class UIManager : PersistentSingleton<UIManager> {
 	public void ReactivateEnemyPanel()
 	{
 		enemyStatsPanel.SetActive(true);
+		pauseScreen.SetActive(true);
 	}
 
 	public void UpdateUI()
@@ -86,6 +92,14 @@ public class UIManager : PersistentSingleton<UIManager> {
 			enemyHealth.fillAmount = (float)enemy.health/enemy.maxHealth;
 			enemyHealthText.text = enemy.health + " <b>/</b> " + enemy.maxHealth;
 		}
+	}
+
+	public void SetPause()
+	{
+		pauseScreen.SetActive(!pauseScreen.activeSelf);
+		Time.timeScale = pauseScreen.activeSelf ? 0f : 1f;
+		Cursor.visible = !pauseScreen.activeSelf;
+
 	}
 
 

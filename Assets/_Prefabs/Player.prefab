@@ -213,6 +213,7 @@ MonoBehaviour:
   attackSpeed: 1
   canMove: 0
   attackAudio: {fileID: 0}
+  exitAudio: {fileID: 0}
 --- !u!212 &212000011410874768
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -273,7 +274,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -471838541
+  m_SortingLayerID: -129828745
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e5ac4d2333beaed40a7f7b04d83765ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -306,7 +307,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -471838541
+  m_SortingLayerID: -129828745
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e5ac4d2333beaed40a7f7b04d83765ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

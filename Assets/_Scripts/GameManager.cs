@@ -5,29 +5,31 @@ using System.Collections;
 
 public class GameManager : PersistentSingleton<GameManager> {
 
-	public GameObject pausePanel;
-
-	private bool isPaused;
-
 	private int startMenuLevel = 1;
 	private int gameLevel = 3;
 
 	public int currentLevel;
 	public int highScore;
 
+	public GameObject canvas;
+
 
 
 	void Start()
 	{
-		if(PlayerPrefs.GetInt("HighScore") == 0)
-		{
-			PlayerPrefs.SetInt("HighScore", 1);
-		}
+		canvas = GameObject.Find("OptionsCanvas");
+		canvas.SetActive(false);
 
 		highScore = PlayerPrefs.GetInt("HighScore");
+		print(highScore);
+
+		if(highScore == 0)
+		{
+			highScore = 1;
+		}
+			
+
 		currentLevel = 1;
-		UIManager.instance.UpdateUI();
-		isPaused = false;
 	}
 
 
@@ -44,17 +46,22 @@ public class GameManager : PersistentSingleton<GameManager> {
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
-			isPaused = !isPaused;
-			SetPause();
+			canvas.SetActive(!canvas.activeSelf);
 		}
+	}
+
+	public void CloseOptions()
+	{
+		canvas.SetActive(!canvas.activeSelf);
 	}
 
 	public void PlayerDie()
 	{
-		if(currentLevel > highScore)
+		print(currentLevel + "\t\t" + highScore);
+		if(highScore > PlayerPrefs.GetInt("HighScore"))
 		{
 			PlayerPrefs.SetInt("HighScore", currentLevel);
-			highScore = PlayerPrefs.GetInt("HighScore");
+			PlayerPrefs.Save();
 		}
 		currentLevel = 1;
 		UIManager.instance.ReactivateEnemyPanel();
@@ -62,6 +69,8 @@ public class GameManager : PersistentSingleton<GameManager> {
 		SceneManager.LoadScene(startMenuLevel);
 	}
 
+
+	/*
 	void SetPause()
 	{
 		float timeScale = !isPaused ? 1f : 0f;
@@ -69,4 +78,5 @@ public class GameManager : PersistentSingleton<GameManager> {
 		Cursor.visible = isPaused;
 		pausePanel.SetActive(isPaused);
 	}
+	*/
 }

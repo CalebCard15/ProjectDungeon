@@ -45,8 +45,11 @@ TagManager:
     uniqueID: 3297998223
     locked: 0
   - name: Objects
+    uniqueID: 2012063537
+    locked: 0
+  - name: Character
     uniqueID: 3823128755
     locked: 0
-  - name: ObjectsPieces
+  - name: CharacterPieces
     uniqueID: 4165138551
     locked: 0
