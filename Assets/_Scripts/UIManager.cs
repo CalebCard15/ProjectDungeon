@@ -5,6 +5,7 @@ using System.Collections;
 
 public class UIManager : PersistentSingleton<UIManager> {
 
+	public GameObject uiCanvas;
 	public GameObject pauseScreen;
 	public Text healthText;
 	public Text xpText;
@@ -19,32 +20,15 @@ public class UIManager : PersistentSingleton<UIManager> {
 	public Image enemyHealth;
 	public Text enemyHealthText;
 
-	void OnEnable()
-	{
-		SceneManager.sceneLoaded += OnSceneLoaded;
-	}
-
-	void OnDisable()
-	{
-		SceneManager.sceneLoaded -= OnSceneLoaded;
-	}
-
-	void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
-	{
-		Player.instance.transform.position = Vector3.zero;
-		Init();
-	}
 
 	// Use this for initialization
 	void Start () {
-		
-	}
-
-	void Init()
-	{
 		//PauseScreen
 		pauseScreen = GameObject.Find("OptionsCanvas");
 		pauseScreen.SetActive(false);
+
+		//UI Canvas
+		uiCanvas = GameObject.Find("Canvas");
 
 		//Player UI
 		healthText = GameObject.Find("HealthText").GetComponent<Text>();
@@ -60,8 +44,10 @@ public class UIManager : PersistentSingleton<UIManager> {
 		enemyHealth = GameObject.Find("EnemyHealthBar").GetComponent<Image>();
 		enemyHealthText = GameObject.Find("EnemyHealthText").GetComponent<Text>();
 		enemyStatsPanel.SetActive(false);
-		UpdateUI();
+		//UpdateUI();
 	}
+
+
 
 	public void ReactivateEnemyPanel()
 	{
@@ -71,8 +57,11 @@ public class UIManager : PersistentSingleton<UIManager> {
 
 	public void UpdateUI()
 	{
-		healthText.text = Player.instance.health + " <b>/</b> " + Player.instance.maxHealth;
-		healthBar.fillAmount = (float)Player.instance.health/Player.instance.maxHealth;
+		if(Player.instance != null)
+		{
+			healthText.text = Player.instance.health + " <b>/</b> " + Player.instance.maxHealth;
+			healthBar.fillAmount = (float)Player.instance.health/Player.instance.maxHealth;
+		}
 		currentScore.text = "Current Level: " + GameManager.instance.currentLevel;
 		highScore.text = "HighScore: " + GameManager.instance.highScore; 
 	}
@@ -102,5 +91,65 @@ public class UIManager : PersistentSingleton<UIManager> {
 
 	}
 
+	public void UIOn()
+	{
+		uiCanvas.SetActive(true);
+	}
 
+	public void UIOff()
+	{
+		uiCanvas.SetActive(false);
+	}
+
+
+
+	/*
+	 * 
+	 * Scrap code pieces that broke my shit
+	 * 
+	 * 
+	void Init()
+	{
+		//PauseScreen
+		pauseScreen = GameObject.Find("OptionsCanvas");
+		pauseScreen.SetActive(false);
+
+		//UI Canvas
+		uiCanvas = GameObject.Find("Canvas");
+
+		//Player UI
+		healthText = GameObject.Find("HealthText").GetComponent<Text>();
+		healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
+		highScore = GameObject.Find("HighScore").GetComponent<Text>();
+		currentScore = GameObject.Find("CurrentScore").GetComponent<Text>();
+
+		//Enemy UI 
+		enemyName = GameObject.Find("EnemyNameText").GetComponent<Text>();
+		enemyStatsPanel = GameObject.Find("EnemyUIPanel");
+		enemyDefenseText = GameObject.Find("EnemyDefenseText").GetComponent<Text>();
+		enemyPowerText = GameObject.Find("EnemyPowerText").GetComponent<Text>();
+		enemyHealth = GameObject.Find("EnemyHealthBar").GetComponent<Image>();
+		enemyHealthText = GameObject.Find("EnemyHealthText").GetComponent<Text>();
+		enemyStatsPanel.SetActive(false);
+		UpdateUI();
+	}
+
+	void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+	{
+		Player.instance.transform.position = Vector3.zero;
+		Init();
+	}
+
+	void OnEnable()
+	{
+		SceneManager.sceneLoaded += OnSceneLoaded;
+	}
+
+	void OnDisable()
+	{
+		
+		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
+	*/
 }

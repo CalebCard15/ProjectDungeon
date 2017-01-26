@@ -9,6 +9,8 @@ public class StartMenuController : MonoBehaviour {
 
 	public void StartGameButtonClick()
 	{
+		UIManager.instance.UIOn();
+		UIManager.instance.UpdateUI();
 		SceneManager.LoadScene(gameLevel);
 	}
 

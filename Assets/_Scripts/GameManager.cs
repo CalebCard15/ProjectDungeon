@@ -11,14 +11,13 @@ public class GameManager : PersistentSingleton<GameManager> {
 	public int currentLevel;
 	public int highScore;
 
-	public GameObject canvas;
+	public Canvas canvas;
 
 
 
 	void Start()
 	{
-		canvas = GameObject.Find("OptionsCanvas");
-		canvas.SetActive(false);
+		canvas = GetComponentInChildren<Canvas>();
 
 		highScore = PlayerPrefs.GetInt("HighScore");
 		print(highScore);
@@ -39,6 +38,7 @@ public class GameManager : PersistentSingleton<GameManager> {
 		Player.instance.exitAudio.Play();
 		yield return new WaitForSeconds(Player.instance.exitAudio.clip.length);
 		highScore = currentLevel > highScore ? currentLevel : highScore;
+		UIManager.instance.UpdateUI();
 		SceneManager.LoadScene(gameLevel);
 	}
 
@@ -46,13 +46,13 @@ public class GameManager : PersistentSingleton<GameManager> {
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
-			canvas.SetActive(!canvas.activeSelf);
+			canvas.enabled = !canvas.enabled;
 		}
 	}
 
 	public void CloseOptions()
 	{
-		canvas.SetActive(!canvas.activeSelf);
+		canvas.enabled = !canvas.enabled;
 	}
 
 	public void PlayerDie()
@@ -65,7 +65,9 @@ public class GameManager : PersistentSingleton<GameManager> {
 		}
 		currentLevel = 1;
 		UIManager.instance.ReactivateEnemyPanel();
+		GameManager.instance.CloseOptions();
 		Player.instance.health = Player.instance.maxHealth;
+		UIManager.instance.UIOff();
 		SceneManager.LoadScene(startMenuLevel);
 	}
 

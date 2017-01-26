@@ -30,6 +30,7 @@ public class Player : PersistentSingleton<Player> {
 		currentTile = DungeonGenerator.dungeon[0,0];
 		anim = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		UIManager.instance.UpdateUI();
 	
 	}
 
