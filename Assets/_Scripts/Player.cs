@@ -16,6 +16,8 @@ public class Player : PersistentSingleton<Player> {
 	public AudioSource attackAudio;				//Sound for the player's attacks
 	public AudioSource exitAudio;				//Sound for when the player goes to the next level
 	public Tile currentTile;
+	public int currentXp;
+	public int xpToNextLevel;
 
 	private SpriteRenderer spriteRenderer;
 	private float walkTimeDelay = .175f;
@@ -26,6 +28,8 @@ public class Player : PersistentSingleton<Player> {
 	// Use this for initialization
 	void Start () {
 		canMove = true;
+		currentXp = 0;
+		xpToNextLevel = 100;
 		health = maxHealth;
 		currentTile = DungeonGenerator.dungeon[0,0];
 		anim = GetComponent<Animator>();
@@ -150,6 +154,16 @@ public class Player : PersistentSingleton<Player> {
 			ResetStats();
 			GameManager.instance.PlayerDie();
 		}
+	}
+
+	public void canLevelUp()
+	{
+		
+	}
+
+	public void levelUP()
+	{
+		
 	}
 
 	private void ResetStats()

@@ -52,7 +52,6 @@ public class UIManager : PersistentSingleton<UIManager> {
 	public void ReactivateEnemyPanel()
 	{
 		enemyStatsPanel.SetActive(true);
-		pauseScreen.SetActive(true);
 	}
 
 	public void UpdateUI()

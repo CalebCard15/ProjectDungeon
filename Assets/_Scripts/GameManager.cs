@@ -65,7 +65,6 @@ public class GameManager : PersistentSingleton<GameManager> {
 		}
 		currentLevel = 1;
 		UIManager.instance.ReactivateEnemyPanel();
-		GameManager.instance.CloseOptions();
 		Player.instance.health = Player.instance.maxHealth;
 		UIManager.instance.UIOff();
 		SceneManager.LoadScene(startMenuLevel);
