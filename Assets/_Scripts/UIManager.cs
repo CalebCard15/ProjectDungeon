@@ -35,6 +35,8 @@ public class UIManager : PersistentSingleton<UIManager> {
 		healthBar = GameObject.Find("HealthBar").GetComponent<Image>();
 		highScore = GameObject.Find("HighScore").GetComponent<Text>();
 		currentScore = GameObject.Find("CurrentScore").GetComponent<Text>();
+		xpText = GameObject.Find("XPText").GetComponent<Text>();
+		xpBar = GameObject.Find("XPBar").GetComponent<Image>();
 
 		//Enemy UI 
 		enemyName = GameObject.Find("EnemyNameText").GetComponent<Text>();
@@ -60,6 +62,8 @@ public class UIManager : PersistentSingleton<UIManager> {
 		{
 			healthText.text = Player.instance.health + " <b>/</b> " + Player.instance.maxHealth;
 			healthBar.fillAmount = (float)Player.instance.health/Player.instance.maxHealth;
+			xpText.text = Player.instance.currentXp + " <b>/</b> " + Player.instance.xpToNextLevel;
+			xpBar.fillAmount = (float)Player.instance.currentXp/Player.instance.xpToNextLevel;
 		}
 		currentScore.text = "Current Level: " + GameManager.instance.currentLevel;
 		highScore.text = "HighScore: " + GameManager.instance.highScore; 

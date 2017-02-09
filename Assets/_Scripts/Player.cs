@@ -16,8 +16,8 @@ public class Player : PersistentSingleton<Player> {
 	public AudioSource attackAudio;				//Sound for the player's attacks
 	public AudioSource exitAudio;				//Sound for when the player goes to the next level
 	public Tile currentTile;
-	public int currentXp;
-	public int xpToNextLevel;
+	public ulong currentXp;
+	public ulong xpToNextLevel;
 
 	private SpriteRenderer spriteRenderer;
 	private float walkTimeDelay = .175f;
@@ -29,7 +29,7 @@ public class Player : PersistentSingleton<Player> {
 	void Start () {
 		canMove = true;
 		currentXp = 0;
-		xpToNextLevel = 100;
+		xpToNextLevel = 50;
 		health = maxHealth;
 		currentTile = DungeonGenerator.dungeon[0,0];
 		anim = GetComponent<Animator>();

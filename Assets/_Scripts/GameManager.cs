@@ -13,10 +13,13 @@ public class GameManager : PersistentSingleton<GameManager> {
 
 	public Canvas canvas;
 
+	public XPLookupTable lookupTable;
+
 
 
 	void Start()
 	{
+		lookupTable = new XPLookupTable();
 		canvas = GetComponentInChildren<Canvas>();
 
 		highScore = PlayerPrefs.GetInt("HighScore");

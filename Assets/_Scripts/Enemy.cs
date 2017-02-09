@@ -3,10 +3,14 @@ using System.Collections;
 
 public class Enemy : InteractableObject {
 
+	private const int BASE_XP_VALUE = 7;
+
 	public int maxHealth = 10;
 	public int health = 10;
 	public int power = 1;
 	public int defense = 0;
+	public int level;
+	public ulong xp;
 
 	public Animator anim;
 	public AudioSource attackAudio;
@@ -16,6 +20,20 @@ public class Enemy : InteractableObject {
 
 	// Use this for initialization
 	void Start () {
+
+		//Sets the level of the enemy
+		if(GameManager.instance.currentLevel == 1)
+		{
+			level = 1;
+		}
+		else
+		{
+			level = GameManager.instance.currentLevel/2;
+		}
+
+
+		xp = GameManager.instance.lookupTable.xpTable[level];	//Sets the xp of the enemy based on the level using the xp lookup table
+
 		anim = GetComponent<Animator>();
 		spriteRenderer = GetComponent<SpriteRenderer>();
 		attackAudio = GetComponent<AudioSource>();
@@ -59,6 +77,7 @@ public class Enemy : InteractableObject {
 		if(health <= 0)
 		{
 			ResetTile();
+			Player.instance.currentXp += xp;
 			Destroy(gameObject);
 		}
 	}
