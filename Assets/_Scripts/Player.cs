@@ -22,6 +22,7 @@ public class Player : PersistentSingleton<Player> {
 	private SpriteRenderer spriteRenderer;
 	private float walkTimeDelay = .175f;
 	private float timeSinceWalk = 0f;
+	private const float XP_RATE = 1.5f;
 
 
 
@@ -156,14 +157,19 @@ public class Player : PersistentSingleton<Player> {
 		}
 	}
 
-	public void canLevelUp()
+	public void gainXP(ulong xp)
 	{
-		
+		currentXp += xp;
+		if(currentXp >= xpToNextLevel)
+		{
+			levelUP();
+			xpToNextLevel = (ulong)(xpToNextLevel * XP_RATE);
+		}
 	}
 
 	public void levelUP()
 	{
-		
+		UIManager.instance.levelUp();
 	}
 
 	private void ResetStats()

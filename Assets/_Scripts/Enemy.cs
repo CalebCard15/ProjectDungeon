@@ -77,7 +77,7 @@ public class Enemy : InteractableObject {
 		if(health <= 0)
 		{
 			ResetTile();
-			Player.instance.currentXp += xp;
+			Player.instance.gainXP(xp);
 			Destroy(gameObject);
 		}
 	}

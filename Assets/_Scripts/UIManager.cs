@@ -6,6 +6,7 @@ using System.Collections;
 public class UIManager : PersistentSingleton<UIManager> {
 
 	public GameObject uiCanvas;
+	public GameObject levelUpCanvas;
 	public GameObject pauseScreen;
 	public Text healthText;
 	public Text xpText;
@@ -46,6 +47,7 @@ public class UIManager : PersistentSingleton<UIManager> {
 		enemyHealth = GameObject.Find("EnemyHealthBar").GetComponent<Image>();
 		enemyHealthText = GameObject.Find("EnemyHealthText").GetComponent<Text>();
 		enemyStatsPanel.SetActive(false);
+
 		//UpdateUI();
 	}
 
