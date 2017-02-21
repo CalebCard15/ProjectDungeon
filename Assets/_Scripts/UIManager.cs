@@ -6,7 +6,7 @@ using System.Collections;
 public class UIManager : PersistentSingleton<UIManager> {
 
 	public GameObject uiCanvas;
-	public GameObject levelUpCanvas;
+	public GameObject levelUpPanel;
 	public GameObject pauseScreen;
 	public Text healthText;
 	public Text xpText;
@@ -24,6 +24,10 @@ public class UIManager : PersistentSingleton<UIManager> {
 
 	// Use this for initialization
 	void Start () {
+
+		//Level Up Screen
+		levelUpPanel = GameObject.Find("LevelUpUI");
+
 		//PauseScreen
 		pauseScreen = GameObject.Find("OptionsCanvas");
 		pauseScreen.SetActive(false);
@@ -86,6 +90,16 @@ public class UIManager : PersistentSingleton<UIManager> {
 			enemyHealth.fillAmount = (float)enemy.health/enemy.maxHealth;
 			enemyHealthText.text = enemy.health + " <b>/</b> " + enemy.maxHealth;
 		}
+	}
+
+	public void LevelUpOpen()
+	{
+		levelUpPanel.SetActive(true);
+	}
+
+	public void LevelUpClose()
+	{
+		levelUpPanel.SetActive(false);
 	}
 
 	public void SetPause()

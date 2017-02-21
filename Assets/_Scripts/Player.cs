@@ -162,14 +162,31 @@ public class Player : PersistentSingleton<Player> {
 		currentXp += xp;
 		if(currentXp >= xpToNextLevel)
 		{
-			levelUP();
+			levelUpStart();
 			xpToNextLevel = (ulong)(xpToNextLevel * XP_RATE);
 		}
 	}
 
-	public void levelUP()
+	public void levelUpStart()
 	{
-		UIManager.instance.levelUp();
+		UIManager.instance.LevelUpOpen();
+	}
+
+	public void handleLevelUp(string type)
+	{
+		switch(type)
+		{
+			case "hp":
+				break;
+
+			case "power":
+				break;
+
+			case "defense":
+				break;
+		}
+
+		UIManager.instance.LevelUpClose();
 	}
 
 	private void ResetStats()
