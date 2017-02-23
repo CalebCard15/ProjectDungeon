@@ -499,6 +499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiCanvas: {fileID: 0}
+  levelUpPanel: {fileID: 0}
   pauseScreen: {fileID: 0}
   healthText: {fileID: 0}
   xpText: {fileID: 0}
@@ -744,7 +745,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114683314254596404}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114000010987081940}
+        m_MethodName: onLevelUpButtonClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: defense
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114223384156097688
@@ -1350,7 +1362,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114748573424945442}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114000010987081940}
+        m_MethodName: onLevelUpButtonClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: hp
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &114983018074711872
@@ -1391,7 +1414,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 114223384156097688}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 114000010987081940}
+        m_MethodName: onLevelUpButtonClick
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: power
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!222 &222060508842896348
@@ -1561,7 +1595,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224056900073386036
 RectTransform:
@@ -1597,7 +1631,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 233, y: 78}
+  m_AnchoredPosition: {x: 233, y: 33}
   m_SizeDelta: {x: 98.86367, y: 100.189415}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224079503068960412
@@ -1742,7 +1776,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1410480262521364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224918491896562998}
@@ -1943,7 +1977,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11, y: 116}
+  m_AnchoredPosition: {x: -11, y: 71}
   m_SizeDelta: {x: 80.80771, y: 103.653824}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224862586783512808
@@ -1997,7 +2031,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -251, y: 72}
+  m_AnchoredPosition: {x: -251, y: 27}
   m_SizeDelta: {x: 93.33337, y: 103.63636}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224945860958993734

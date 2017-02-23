@@ -27,6 +27,7 @@ public class UIManager : PersistentSingleton<UIManager> {
 
 		//Level Up Screen
 		levelUpPanel = GameObject.Find("LevelUpUI");
+		levelUpPanel.SetActive(false);
 
 		//PauseScreen
 		pauseScreen = GameObject.Find("OptionsCanvas");
@@ -108,6 +109,11 @@ public class UIManager : PersistentSingleton<UIManager> {
 		Time.timeScale = pauseScreen.activeSelf ? 0f : 1f;
 		Cursor.visible = !pauseScreen.activeSelf;
 
+	}
+
+	public void onLevelUpButtonClick(string type)
+	{
+		Player.instance.handleLevelUp(type);
 	}
 
 	public void UIOn()

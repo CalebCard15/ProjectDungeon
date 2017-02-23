@@ -30,7 +30,7 @@ public class Player : PersistentSingleton<Player> {
 	void Start () {
 		canMove = true;
 		currentXp = 0;
-		xpToNextLevel = 50;
+		xpToNextLevel = 5;
 		health = maxHealth;
 		currentTile = DungeonGenerator.dungeon[0,0];
 		anim = GetComponent<Animator>();
@@ -177,12 +177,16 @@ public class Player : PersistentSingleton<Player> {
 		switch(type)
 		{
 			case "hp":
+				maxHealth += 5;
+				health += 5;
 				break;
 
 			case "power":
+				power += 1;
 				break;
 
 			case "defense":
+				defense += 1;
 				break;
 		}
 
